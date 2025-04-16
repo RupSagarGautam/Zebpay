@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit - Zebpay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1665D8;
+            --secondary-color: #6B7C93;
+            --success-color: #00B167;
+            --danger-color: #DC3545;
+            --warning-color: #FFC107;
+            --background-color: #F8F9FA;
+            --card-background: #FFFFFF;
+            --border-color: #E3E8EF;
+            --text-primary: #1A2B48;
+            --text-secondary: #6B7C93;
+        }
+
+        body.dark-mode {
+            --background-color: #1A2B48;
+            --card-background: #2D3B55;
+            --border-color: #3D4B66;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0AEC0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: var(--card-background);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sign-up-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .deposit-card {
+            background-color: var(--card-background);
+        }
+
+        body.dark-mode .deposit-option {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 6rem auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .deposit-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .deposit-header {
+            margin-bottom: 2rem;
+        }
+
+        .deposit-header h1 {
+            color: var(--text-primary);
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .deposit-header p {
+            color: var(--text-secondary);
+        }
+
+        .deposit-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .deposit-option {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .deposit-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .deposit-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(22, 101, 216, 0.05);
+        }
+
+        .option-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(22, 101, 216, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+        }
+
+        .option-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .option-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .deposit-form {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #1557b8;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="/assets/logo.jpg" alt="Zebpay Logo">
+            <span>Zebpay</span>
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/html/trade.html">Trade</a></li>
+                <li><a href="/html/assets.html">Assets</a></li>
+                <li><a href="/html/market.html">Markets</a></li>
+                <li><a href="/html/blog.html">Blog</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="/html/signup.html" class="sign-up-btn">Sign Up</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="deposit-card">
+            <div class="deposit-header">
+                <h1>Deposit Funds</h1>
+                <p>Choose your preferred deposit method</p>
+            </div>
+
+            <div class="deposit-options">
+                <div class="deposit-option" onclick="selectOption(this, 'bank')">
+                    <div class="option-header">
+                        <div class="option-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="option-title">Bank Transfer</div>
+                    </div>
+                    <p class="option-description">Transfer funds directly from your bank account</p>
+                </div>
+
+                <div class="deposit-option" onclick="selectOption(this, 'card')">
+                    <div class="option-header">
+                        <div class="option-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="option-title">Credit/Debit Card</div>
+                    </div>
+                    <p class="option-description">Instant deposit using your card</p>
+                </div>
+
+                <div class="deposit-option" onclick="selectOption(this, 'crypto')">
+                    <div class="option-header">
+                        <div class="option-icon">
+                            <i class="fab fa-bitcoin"></i>
+                        </div>
+                        <div class="option-title">Crypto Transfer</div>
+                    </div>
+                    <p class="option-description">Deposit using another crypto wallet</p>
+                </div>
+            </div>
+
+            <form id="depositForm" class="deposit-form">
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="currency">Currency</label>
+                    <input type="text" id="currency" name="currency" value="USD" readonly>
+                </div>
+
+                <div id="bankFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="accountName">Account Name</label>
+                        <input type="text" id="accountName" name="accountName" placeholder="Enter account name">
+                    </div>
+                    <div class="form-group">
+                        <label for="accountNumber">Account Number</label>
+                        <input type="text" id="accountNumber" name="accountNumber" placeholder="Enter account number">
+                    </div>
+                </div>
+
+                <div id="cardFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="Enter card number">
+                    </div>
+                    <div class="form-group">
+                        <label for="expiryDate">Expiry Date</label>
+                        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="password" id="cvv" name="cvv" placeholder="Enter CVV" maxlength="3">
+                    </div>
+                </div>
+
+                <div id="cryptoFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="walletAddress">Wallet Address</label>
+                        <input type="text" id="walletAddress" name="walletAddress" placeholder="Enter wallet address">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Proceed with Deposit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function selectOption(element, type) {
+            // Remove selected class from all options
+            document.querySelectorAll('.deposit-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Add selected class to clicked option
+            element.classList.add('selected');
+
+            // Hide all field groups
+            document.getElementById('bankFields').style.display = 'none';
+            document.getElementById('cardFields').style.display = 'none';
+            document.getElementById('cryptoFields').style.display = 'none';
+
+            // Show selected field group
+            document.getElementById(type + 'Fields').style.display = 'block';
+        }
+
+        document.getElementById('depositForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add deposit logic here
+            console.log('Form submitted');
+        });
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+    </script>
+</body>
+</html>

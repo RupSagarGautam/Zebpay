@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw - Zebpay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1665D8;
+            --secondary-color: #6B7C93;
+            --success-color: #00B167;
+            --danger-color: #DC3545;
+            --warning-color: #FFC107;
+            --background-color: #F8F9FA;
+            --card-background: #FFFFFF;
+            --border-color: #E3E8EF;
+            --text-primary: #1A2B48;
+            --text-secondary: #6B7C93;
+        }
+
+        body.dark-mode {
+            --background-color: #1A2B48;
+            --card-background: #2D3B55;
+            --border-color: #3D4B66;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0AEC0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: var(--card-background);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sign-up-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .withdraw-card {
+            background-color: var(--card-background);
+        }
+
+        body.dark-mode .balance-info {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 6rem auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .withdraw-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .withdraw-header {
+            margin-bottom: 2rem;
+        }
+
+        .withdraw-header h1 {
+            color: var(--text-primary);
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .withdraw-header p {
+            color: var(--text-secondary);
+        }
+
+        .balance-info {
+            background-color: rgba(22, 101, 216, 0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .balance-info h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .balance-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-label {
+            color: var(--text-secondary);
+        }
+
+        .balance-value {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .withdraw-form {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .input-with-max {
+            position: relative;
+        }
+
+        .max-button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(22, 101, 216, 0.1);
+            color: var(--primary-color);
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .max-button:hover {
+            background: rgba(22, 101, 216, 0.2);
+        }
+
+        .fee-info {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .fee-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .fee-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .fee-value {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #1557b8;
+        }
+
+        .warning-text {
+            color: var(--danger-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="/assets/logo.jpg" alt="Zebpay Logo">
+            <span>Zebpay</span>
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/html/trade.html">Trade</a></li>
+                <li><a href="/html/assets.html">Assets</a></li>
+                <li><a href="/html/market.html">Markets</a></li>
+                <li><a href="/html/blog.html">Blog</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="/html/signup.html" class="sign-up-btn">Sign Up</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="withdraw-card">
+            <div class="withdraw-header">
+                <h1>Withdraw Funds</h1>
+                <p>Withdraw your funds to your preferred destination</p>
+            </div>
+
+            <div class="balance-info">
+                <h3>Available Balance</h3>
+                <div class="balance-row">
+                    <span class="balance-label">Total Balance</span>
+                    <span class="balance-value">$127,534.21</span>
+                </div>
+                <div class="balance-row">
+                    <span class="balance-label">Available for Withdrawal</span>
+                    <span class="balance-value">$127,534.21</span>
+                </div>
+            </div>
+
+            <form id="withdrawForm" class="withdraw-form">
+                <div class="form-group">
+                    <label for="withdrawMethod">Withdraw Method</label>
+                    <select id="withdrawMethod" name="withdrawMethod" required onchange="handleMethodChange()">
+                        <option value="">Select withdrawal method</option>
+                        <option value="bank">Bank Transfer</option>
+                        <option value="crypto">Cryptocurrency</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <div class="input-with-max">
+                        <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+                        <button type="button" class="max-button" onclick="setMaxAmount()">MAX</button>
+                    </div>
+                </div>
+
+                <div id="bankFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="bankName">Bank Name</label>
+                        <input type="text" id="bankName" name="bankName" placeholder="Enter bank name">
+                    </div>
+                    <div class="form-group">
+                        <label for="accountName">Account Name</label>
+                        <input type="text" id="accountName" name="accountName" placeholder="Enter account name">
+                    </div>
+                    <div class="form-group">
+                        <label for="accountNumber">Account Number</label>
+                        <input type="text" id="accountNumber" name="accountNumber" placeholder="Enter account number">
+                    </div>
+                    <div class="form-group">
+                        <label for="swiftCode">SWIFT/BIC Code</label>
+                        <input type="text" id="swiftCode" name="swiftCode" placeholder="Enter SWIFT/BIC code">
+                    </div>
+                </div>
+
+                <div id="cryptoFields" style="display: none;">
+                    <div class="form-group">
+                        <label for="cryptoAsset">Select Cryptocurrency</label>
+                        <select id="cryptoAsset" name="cryptoAsset" onchange="updateFee()">
+                            <option value="BTC">Bitcoin (BTC)</option>
+                            <option value="ETH">Ethereum (ETH)</option>
+                            <option value="DOGE">Dogecoin (DOGE)</option>
+                            <option value="XRP">Ripple (XRP)</option>
+                            <option value="LTC">Litecoin (LTC)</option>
+                            <option value="BCH">Bitcoin Cash (BCH)</option>
+                            <option value="TRX">TRON (TRX)</option>
+                            <option value="FIL">Filecoin (FIL)</option>
+                            <option value="IOTA">IOTA (IOTA)</option>
+                            <option value="EOS">EOS (EOS)</option>
+                            <option value="BTS">BitShares (BTS)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="walletAddress">Wallet Address</label>
+                        <input type="text" id="walletAddress" name="walletAddress" placeholder="Enter wallet address">
+                    </div>
+                </div>
+
+                <div class="fee-info">
+                    <div class="fee-row">
+                        <span class="fee-label">Withdrawal Fee</span>
+                        <span class="fee-value" id="withdrawalFee">$2.50</span>
+                    </div>
+                    <div class="fee-row">
+                        <span class="fee-label">You will receive</span>
+                        <span class="fee-value" id="receiveAmount">$0.00</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Confirm Withdrawal</button>
+                <p class="warning-text">Please verify all details before confirming. Withdrawals cannot be reversed.</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function handleMethodChange() {
+            const method = document.getElementById('withdrawMethod').value;
+            document.getElementById('bankFields').style.display = method === 'bank' ? 'block' : 'none';
+            document.getElementById('cryptoFields').style.display = method === 'crypto' ? 'block' : 'none';
+            updateFee();
+        }
+
+        function updateFee() {
+            const method = document.getElementById('withdrawMethod').value;
+            const crypto = document.getElementById('cryptoAsset').value;
+            let fee = 2.50;
+
+            if (method === 'crypto' && crypto === 'BTS') {
+                fee = 0;
+            }
+
+            document.getElementById('withdrawalFee').textContent = `$${fee.toFixed(2)}`;
+            updateReceiveAmount();
+        }
+
+        function setMaxAmount() {
+            document.getElementById('amount').value = '127534.21';
+            updateReceiveAmount();
+        }
+
+        function updateReceiveAmount() {
+            const amount = parseFloat(document.getElementById('amount').value) || 0;
+            const method = document.getElementById('withdrawMethod').value;
+            const crypto = document.getElementById('cryptoAsset').value;
+            let fee = 2.50;
+
+            if (method === 'crypto' && crypto === 'BTS') {
+                fee = 0;
+            }
+
+            const receiveAmount = Math.max(0, amount - fee);
+            document.getElementById('receiveAmount').textContent = `$${receiveAmount.toFixed(2)}`;
+        }
+
+        document.getElementById('amount').addEventListener('input', updateReceiveAmount);
+        document.getElementById('cryptoAsset').addEventListener('change', updateFee);
+
+        document.getElementById('withdrawForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add withdrawal logic here
+            console.log('Form submitted');
+        });
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+    </script>
+</body>
+</html>

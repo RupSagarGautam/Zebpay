@@ -1,0 +1,535 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: #fff;
+    color: #333;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header styles */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 32px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    text-transform: lowercase;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.profile-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+}
+
+.menu-btn span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+    transition: all 0.3s ease;
+}
+
+/* Breadcrumb styles */
+.breadcrumb {
+    padding: 15px 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.breadcrumb .separator {
+    margin: 0 8px;
+    color: #999;
+}
+
+/* Main content styles */
+main {
+    padding: 0 20px;
+    flex-grow: 1;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+/* Balance card styles */
+.balance-card {
+    background-color: #00BCD4;
+    color: white;
+    padding: 24px;
+    border-radius: 12px;
+    margin: 20px 0;
+}
+
+.balance-label {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.balance-amount {
+    font-size: 36px;
+    font-weight: 500;
+}
+
+/* Form styles */
+.withdrawal-form {
+    margin-top: 30px;
+}
+
+.withdrawal-form h2 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.network-btn {
+    background-color: #00BCD4;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 12px 15px;
+    padding-right: 40px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.input-wrapper button,
+.input-wrapper .eye-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    color: #666;
+}
+
+.eye-icon:hover {
+    color: #333;
+}
+
+.all-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00BCD4;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cost-details {
+    margin: 30px 0;
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.cost-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #666;
+    padding: 8px 0;
+}
+
+.cost-row:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.helper-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.limits {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.limits p {
+    margin-bottom: 5px;
+}
+
+.confirm-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #00BCD4;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+/* Reminder styles */
+.reminder {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.reminder h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reminder ol {
+    padding-left: 20px;
+}
+
+.reminder li {
+    margin-bottom: 10px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.reminder ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+/* Footer styles */
+footer {
+    margin-top: 60px;
+    padding: 40px 0;
+    background: #f8f8f8;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.footer-section {
+    flex: 1;
+    max-width: 300px;
+}
+
+.footer-section h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+    text-transform: capitalize;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #00BCD4;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+.footer-logo {
+    height: 30px;
+    margin-bottom: 15px;
+}
+
+.footer-bottom p {
+    color: #999;
+    font-size: 14px;
+}
+
+/* Asset Overview styles */
+.asset-overview {
+    min-height: calc(100vh - 400px);
+    padding-bottom: 60px;
+}
+
+.asset-overview h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.balance-section {
+    margin-bottom: 30px;
+}
+
+.balance-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.balance-header h2 {
+    font-size: 18px;
+    color: #666;
+    font-weight: normal;
+}
+
+.eye-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.balance-amount {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.action-btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn.primary {
+    background-color: #00BCD4;
+    color: white;
+    border: none;
+}
+
+.action-btn.secondary {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.action-btn.icon-btn {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: white;
+}
+
+.search-bar {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 12px 12px 44px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.hide-balance {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.assets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.asset-item {
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.asset-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.asset-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+}
+
+.detail-row .label {
+    color: #999;
+}
+
+/* Update profile icon */
+.profile-icon svg {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* Logo container update */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+} 

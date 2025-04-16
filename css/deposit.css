@@ -1,0 +1,170 @@
+/* Deposit Page Specific Styles */
+
+/* Address Display Styles */
+.address-group {
+    margin-top: 30px;
+  }
+  
+  .address-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .address-display {
+    flex: 1;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px 0 0 6px;
+    padding: 12px 15px;
+    color: var(--text-primary);
+    font-family: monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .placeholder-text {
+    color: var(--text-muted);
+    font-style: italic;
+    font-family: "Inter", sans-serif;
+  }
+  
+  .copy-btn {
+    background-color: var(--light-card-bg);
+    border: 1px solid var(--border-color);
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    padding: 12px 15px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .copy-btn:hover {
+    background-color: var(--hover-bg);
+    color: var(--text-primary);
+  }
+  
+  .copy-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* QR Code Styles */
+  .qr-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    border-radius: 6px;
+    padding: 10px;
+  }
+  
+  .qr-code img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  
+  .qr-code.empty {
+    background-color: var(--input-bg);
+    color: var(--text-muted);
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  /* Amount Input Styles */
+  .input-wrapper {
+    position: relative;
+  }
+  
+  .max-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--primary-color);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .max-btn:hover {
+    background-color: var(--primary-dark);
+  }
+  
+  .min-deposit {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  
+  .min-amount {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  
+  /* Transaction History Styles */
+  .transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .transaction-item:last-child {
+    border-bottom: none;
+  }
+  
+  .transaction-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .transaction-crypto {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .transaction-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  
+  .transaction-amount {
+    font-weight: 600;
+  }
+  
+  .transaction-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .status-completed {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--secondary-color);
+  }
+  
+  .status-pending {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+  }
+  
+  .status-failed {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+  }
+  

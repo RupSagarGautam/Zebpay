@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zebpay - Withdrawal of coins</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/withdrawal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="light-mode">
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="/assets/logo.jpg" alt="Crypto Platform Logo">
+            <span class="logo-text">Zebpay</span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/html/trade.html">Trade</a></li>
+                <li><a href="/html/assets.html">Assets</a></li>
+                <li><a href="#">Markets</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="/html/signup.html" class="sign-up-btn">Sign Up</a>
+            <div class="profile-icon" id="profileIcon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="/html/trade.html"><i class="fas fa-exchange-alt"></i> Trade</a></li>
+                <li><a href="#"><i class="fas fa-file-contract"></i> Contract</a></li>
+                <li><a href="/html/assets.html"><i class="fas fa-wallet"></i> Assets</a></li>
+                <li><a href="#"><i class="fas fa-shield-alt"></i> Security Settings</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> My Notice</a></li>
+                <li><a href="#"><i class="fas fa-gift"></i> Invitation Rebate</a></li>
+                <li><a href="#"><i class="fas fa-headset"></i> Online Service</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Terms of Service</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="sign-out-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="/html/assets.html" class="nav-item">Assets</a>
+            <span class="separator">/</span>
+            <span class="nav-item">Withdrawal of coins</span>
+        </nav>
+
+        <main>
+            <div class="page-header">
+                <a href="/html/assets.html" class="back-btn">←</a>
+                <h1>Withdrawal of coins</h1>
+            </div>
+
+            <div class="balance-card">
+                <p class="balance-label">Currently available assets(USDT)</p>
+                <p class="balance-amount">0.000000</p>
+            </div>
+
+            <section class="withdrawal-form">
+                <h2>Select the main network</h2>
+                <button class="network-btn">Offline Payment</button>
+
+                <div class="form-group">
+                    <label>Bank name</label>
+                    <div class="input-wrapper">
+                        <input type="text" placeholder="Bank name">
+                        <img src="/icon/helper-icon.svg" alt="helper" class="helper-icon">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Payee name</label>
+                    <input type="text" placeholder="Payee name">
+                </div>
+
+                <div class="form-group">
+                    <label>Bank card number</label>
+                    <input type="text" placeholder="Bank card number">
+                </div>
+
+                <div class="form-group">
+                    <label>Withdrawal amount</label>
+                    <div class="input-wrapper">
+                        <input type="text" placeholder="Please enter the withdrawal amount">
+                        <span class="all-btn">all</span>
+                    </div>
+                    <div class="limits">
+                        <p>Minimum withdrawal amount: <span>0.0000USDT</span></p>
+                        <p>Maximum withdrawal amount: <span>10000.00USDT</span></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Security password</label>
+                    <div class="input-wrapper">
+                        <input type="password" placeholder="Please enter a security password" id="securityPassword">
+                        <button class="eye-icon" onclick="togglePassword()">👁️</button>
+                    </div>
+                </div>
+
+                <div class="cost-details">
+                    <div class="cost-row">
+                        <span>cost</span>
+                        <span class="strikethrough">0 USDT</span>
+                    </div>
+                    <div class="cost-row">
+                        <span>Taxes</span>
+                        <span>0 USDT</span>
+                    </div>
+                    <div class="cost-row">
+                        <span>Actual receipt</span>
+                        <span>0 USDT</span>
+                    </div>
+                </div>
+
+                <button class="confirm-btn">confirm</button>
+
+                <div class="reminder">
+                    <h3>🔵 Warm reminder</h3>
+                    <ol>
+                        <li>In order to maintain the stable operation of the platform, a fixed fee of 1U is charged for each withdrawal as a maintenance fee</li>
+                        <li>Different taxes will be charged for each withdrawal according to the amount of withdrawal. The fees are as follows
+                            <ul>
+                                <li>10-100U collect 8% tax</li>
+                                <li>100-500U collect 5% tax</li>
+                                <li>500-1000U collect 1% tax</li>
+                                <li>1000Uabove tax exemption</li>
+                            </ul>
+                        </li>
+                        <li>The withdrawal will be confirmed and reviewed by multiple nodes, and the arrival time is T+5 days of the system time</li>
+                    </ol>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/assets/logo.jpg" alt="Crypto Platform Logo">
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Trade</h4>
+                        <ul>
+                            <li><a href="#">Exchange</a></li>
+                            <li><a href="#">OTC</a></li>
+                            <li><a href="#">API Services</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Features</h4>
+                        <ul>
+                            <li><a href="#">Overview</a></li>
+                            <li><a href="#">Portfolio</a></li>
+                            <li><a href="#">Security</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Crypto Trading Platform. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/withdrawal.js"></script>
+</body>
+</html> 

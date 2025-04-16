@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Zebpay</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2962ff;
+            --secondary-color: #0039cb;
+            --accent-color: #768fff;
+            --text-color: #333;
+            --text-light: #666;
+            --bg-color: #f8f9fa;
+            --card-bg: #fff;
+            --border-color: #eee;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --input-bg: #f8f9fa;
+            --input-border: #e3e8ef;
+            --input-text: #333;
+            --form-bg: #fff;
+        }
+
+        body.dark-mode {
+            --primary-color: #2962ff;
+            --secondary-color: #0039cb;
+            --accent-color: #768fff;
+            --text-color: #f8f9fa;
+            --text-light: #aaa;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --border-color: #333;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --input-bg: #1e1e1e;
+            --input-border: #333;
+            --input-text: #f8f9fa;
+            --form-bg: #1e1e1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .main-container {
+            padding-top: 80px; /* Height of header */
+            min-height: calc(100vh - 80px); /* Subtract header height */
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .form-section {
+            background: var(--form-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 24px var(--shadow-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .form-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .input-group {
+            margin-bottom: 1.75rem;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1rem;
+            
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.5rem;
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            background-color: var(--input-bg);
+            color: var(--input-text);
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 2.8rem;
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-light);
+            opacity: 0.7;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(41, 98, 255, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(41, 98, 255, 0.2);
+        }
+
+        .form-switch {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .form-switch p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .switch-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .switch-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--form-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+
+            .form-section {
+                padding: 2rem;
+                border-radius: 12px;
+            }
+
+            .form-header h2 {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-section {
+                padding: 1.5rem;
+            }
+
+            .form-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .input-group input {
+                padding: 0.875rem 0.875rem 0.875rem 2.25rem;
+            }
+        }
+
+        /* Login Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .login-popup {
+            background: var(--form-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active .login-popup {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .close-popup:hover {
+            color: var(--primary-color);
+            background-color: var(--input-bg);
+        }
+
+        @keyframes popupIn {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes overlayIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="../assets/logo.jpg" alt="Crypto Platform Logo">
+            <span class="logo-text"></span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="trade.html">Trade</a></li>
+                <li><a href="assets.html">Assets</a></li>
+                <li><a href="market.html">Markets</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="signup.html" class="sign-up-btn active">Sign Up</a>
+            <div class="profile-icon" id="profileIcon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="trade.html"><i class="fas fa-exchange-alt"></i> Trade</a></li>
+                <li><a href="#"><i class="fas fa-file-contract"></i> Contract</a></li>
+                <li><a href="assets.html"><i class="fas fa-wallet"></i> Assets</a></li>
+                <li><a href="#"><i class="fas fa-shield-alt"></i> Security Settings</a></li>
+                <li><a href="#"><i class="fas fa-bell"></i> My Notice</a></li>
+                <li><a href="#"><i class="fas fa-gift"></i> Invitation Rebate</a></li>
+                <li><a href="#"><i class="fas fa-headset"></i> Online Service</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Terms of Service</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="sign-out-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="form-section">
+                <form class="signup-form form-active">
+                    <div class="form-header">
+                        <h2>Create Account</h2>
+                        <p>Start your crypto journey with Zebpay</p>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <i class="fas fa-user"></i>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Create a password" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign Up</button>
+                    <div class="form-switch">
+                        <p>Already have an account?</p>
+                        <a href="#" class="switch-link" id="showLogin">Log In</a>
+                    </div>
+                    <div class="social-buttons">
+                        <button type="button" class="social-btn" aria-label="Sign in with Google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button type="button" class="social-btn" aria-label="Sign in with Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button type="button" class="social-btn" aria-label="Sign in with Apple">
+                            <i class="fab fa-apple"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Popup -->
+    <div class="popup-overlay" id="loginPopup">
+        <div class="login-popup">
+            <button class="close-popup" id="closePopup">
+                <i class="fas fa-times"></i>
+            </button>
+            <form class="login-form">
+                <div class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Log in to your Zebpay account</p>
+                </div>
+                <div class="input-group">
+                    <label for="login-email">Email</label>
+                    <i class="fas fa-user"></i>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Forgot your password?</a>
+                </div>
+                <button type="submit" class="submit-btn">Log In</button>
+                <div class="social-buttons">
+                    <button type="button" class="social-btn" aria-label="Sign in with Google">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button type="button" class="social-btn" aria-label="Sign in with Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button type="button" class="social-btn" aria-label="Sign in with Apple">
+                        <i class="fab fa-apple"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Theme Toggle Functionality
+        const body = document.body;
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+
+        // Login Popup Functionality
+        const loginPopup = document.getElementById('loginPopup');
+        const showLoginBtn = document.getElementById('showLogin');
+        const closePopupBtn = document.getElementById('closePopup');
+
+        showLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginPopup.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+
+        closePopupBtn.addEventListener('click', () => {
+            loginPopup.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+
+        // Close popup when clicking outside
+        loginPopup.addEventListener('click', (e) => {
+            if (e.target === loginPopup) {
+                loginPopup.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close popup on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && loginPopup.classList.contains('active')) {
+                loginPopup.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Form Validation
+        document.querySelector('.signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            console.log('Signup form submitted');
+        });
+
+        document.querySelector('.login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Login form submitted');
+        });
+
+        // Sidebar Toggle Functionality
+        const profileIcon = document.getElementById('profileIcon');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebarBtn = document.getElementById('closeSidebar');
+
+        profileIcon.addEventListener('click', () => {
+            sidebar.classList.add('active');
+        });
+
+        closeSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !profileIcon.contains(e.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html> 

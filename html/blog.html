@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Blog - Zebpay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1665D8;
+            --secondary-color: #1E1E1E;
+            --text-color: #333;
+            --light-text: #666;
+            --background-color: #fff;
+            --border-color: #e0e0e0;
+            --hover-color: #f5f5f5;
+            --card-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --card-background: #fff;
+        }
+
+        body.dark-mode {
+            --background-color: #0A1929;
+            --secondary-color: #A0AEC0;
+            --text-color: #E2E8F0;
+            --light-text: #A0AEC0;
+            --border-color: #1E3A5F;
+            --hover-color: #1A365D;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            --card-background: #0F2942;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--card-background);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--card-shadow);
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav a.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            font-weight: 700;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--text-color);
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .blog-card,
+        body.dark-mode .featured-post,
+        body.dark-mode .newsletter {
+            background-color: var(--card-background);
+        }
+
+        .sign-up-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .blog-header p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+
+        .categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background: var(--card-background);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .featured-post {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 3rem;
+        }
+
+        .featured-post img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 2rem;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .featured-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .featured-content p {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .blog-card p {
+            color: var(--light-text);
+        }
+
+        .newsletter {
+            background-color: var(--card-background);
+            padding: 3rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 4rem;
+            box-shadow: var(--card-shadow);
+        }
+
+        .newsletter h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .newsletter p {
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--light-text);
+        }
+
+        .subscribe-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .subscribe-btn:hover {
+            background-color: #2D7FF9;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+
+            .featured-post img {
+                height: 300px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .subscribe-btn {
+                width: 100%;
+            }
+        }
+
+        /* Additional dark mode specific styles */
+        body.dark-mode img {
+            filter: brightness(0.9);
+        }
+
+        body.dark-mode .post-meta i {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .read-more {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .read-more:hover {
+            color: #2D7FF9;
+        }
+
+        body.dark-mode .category-btn:not(.active):hover {
+            background-color: var(--hover-color);
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="/assets/logo.jpg" alt="Zebpay Logo">
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/html/trade.html">Trade</a></li>
+                <li><a href="/html/assets.html">Assets</a></li>
+                <li><a href="/html/market.html">Markets</a></li>
+                <li><a href="/html/blog.html" class="active">Blog</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="/html/signup.html" class="sign-up-btn">Sign Up</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Blog Header -->
+        <div class="blog-header">
+            <h1>Crypto Insights & News</h1>
+            <p>Stay updated with the latest trends, analysis, and news in the cryptocurrency world</p>
+        </div>
+
+        <!-- Categories -->
+        <div class="categories">
+            <button class="category-btn active">All</button>
+            <button class="category-btn">Bitcoin</button>
+            <button class="category-btn">Ethereum</button>
+            <button class="category-btn">DeFi</button>
+            <button class="category-btn">NFTs</button>
+            <button class="category-btn">Trading</button>
+            <button class="category-btn">Technology</button>
+            <button class="category-btn">Regulation</button>
+        </div>
+
+        <!-- Featured Post -->
+        <article class="featured-post">
+            <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d" alt="Bitcoin and Cryptocurrency">
+            <div class="featured-content">
+                <div class="post-meta">
+                    <span><i class="far fa-calendar"></i> March 15, 2024</span>
+                    <span><i class="far fa-clock"></i> 5 min read</span>
+                    <span><i class="far fa-folder"></i> Bitcoin</span>
+                </div>
+                <h2>The Future of Bitcoin: What to Expect in 2024</h2>
+                <p>As we move further into 2024, the cryptocurrency market continues to evolve. Bitcoin, the pioneer of digital currencies, faces new challenges and opportunities. In this comprehensive analysis, we explore the key factors that could influence Bitcoin's trajectory...</p>
+                <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </article>
+
+        <!-- Blog Grid -->
+        <div class="blog-grid">
+            <!-- Blog Card 1 -->
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1605792657660-596af9009e82" alt="Ethereum">
+                <div class="blog-card-content">
+                    <div class="post-meta">
+                        <span><i class="far fa-calendar"></i> March 14, 2024</span>
+                        <span><i class="far fa-clock"></i> 3 min read</span>
+                    </div>
+                    <h3>Understanding Ethereum's Layer 2 Solutions</h3>
+                    <p>Explore the various Layer 2 scaling solutions for Ethereum and their impact on transaction speeds and costs...</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Blog Card 2 -->
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1620321023374-d1a68fbc720d" alt="DeFi">
+                <div class="blog-card-content">
+                    <div class="post-meta">
+                        <span><i class="far fa-calendar"></i> March 13, 2024</span>
+                        <span><i class="far fa-clock"></i> 4 min read</span>
+                    </div>
+                    <h3>DeFi 2.0: The Evolution of Decentralized Finance</h3>
+                    <p>Discover how DeFi protocols are evolving and what new innovations are shaping the future of finance...</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <!-- Blog Card 3 -->
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0" alt="NFTs">
+                <div class="blog-card-content">
+                    <div class="post-meta">
+                        <span><i class="far fa-calendar"></i> March 12, 2024</span>
+                        <span><i class="far fa-clock"></i> 3 min read</span>
+                    </div>
+                    <h3>NFTs Beyond Art: Real-World Applications</h3>
+                    <p>Explore how NFTs are being used beyond digital art in various industries and real-world scenarios...</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest crypto news, analysis, and insights.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address">
+                <button type="submit" class="subscribe-btn">Subscribe</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        // Category Selection
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                // Here you would typically filter the blog posts based on the selected category
+            });
+        });
+
+        // Newsletter Form
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('.newsletter-input').value;
+            if (email) {
+                alert('Thank you for subscribing! You will receive our newsletter soon.');
+                e.target.reset();
+            }
+        });
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+    </script>
+</body>
+</html> 

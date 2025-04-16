@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assets - Zebpay</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1665D8;
+            --secondary-color: #6B7C93;
+            --success-color: #00B167;
+            --danger-color: #DC3545;
+            --warning-color: #FFC107;
+            --background-color: #F8F9FA;
+            --card-background: #FFFFFF;
+            --border-color: #E3E8EF;
+            --text-primary: #1A2B48;
+            --text-secondary: #6B7C93;
+        }
+
+        body.dark-mode {
+            --background-color: #1A2B48;
+            --card-background: #2D3B55;
+            --border-color: #3D4B66;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0AEC0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: var(--card-background);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav a.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sign-up-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--text-primary);
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 6rem auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .portfolio-overview {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .portfolio-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .portfolio-change {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: var(--success-color);
+        }
+
+        .portfolio-chart {
+            height: 300px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .asset-card {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .asset-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .asset-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .asset-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .asset-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .asset-symbol {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .asset-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .info-value {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .asset-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-buy {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-sell {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .transactions {
+            background: var(--card-background);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .transactions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .transactions-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .transactions-list th,
+        .transactions-list td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .transactions-list th {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .transaction-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .type-buy {
+            background-color: rgba(0, 177, 103, 0.1);
+            color: var(--success-color);
+        }
+
+        .type-sell {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .portfolio-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .transactions-list {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="/assets/logo.jpg" alt="Zebpay Logo">
+            <span>Zebpay</span>
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/html/trade.html">Trade</a></li>
+                <li><a href="/html/assets.html" class="active">Assets</a></li>
+                <li><a href="/html/market.html">Markets</a></li>
+                <li><a href="/html/blog.html">Blog</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="/html/signup.html" class="sign-up-btn">Sign Up</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Portfolio Overview -->
+        <section class="portfolio-overview">
+            <div class="portfolio-header">
+                <div>
+                    <h2>Portfolio Value</h2>
+                    <div class="portfolio-value">$127,534.21</div>
+                    <div class="portfolio-change">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>+12.5% (24h)</span>
+            </div>
+                </div>
+                <div class="portfolio-actions">
+                    <a href="/html/deposit.html" class="action-btn btn-buy">Deposit</a>
+                    <a href="/html/withdraw.html" class="action-btn btn-sell">Withdraw</a>
+                </div>
+            </div>
+            <div class="portfolio-chart">
+                <canvas id="portfolioChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Assets Grid -->
+        <div class="assets-grid">
+            <!-- Bitcoin -->
+            <div class="asset-card">
+                <div class="asset-header">
+                    <img src="/assets/bitcoin.png" alt="Bitcoin" class="asset-icon">
+                    <div>
+                        <div class="asset-name">Bitcoin</div>
+                        <div class="asset-symbol">BTC</div>
+                    </div>
+                </div>
+                <div class="asset-info">
+                    <div class="info-item">
+                        <span class="info-label">Balance</span>
+                        <span class="info-value">2.5 BTC</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Value</span>
+                        <span class="info-value">$85,750.00</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">24h Change</span>
+                        <span class="info-value" style="color: var(--success-color)">+5.2%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Price</span>
+                        <span class="info-value">$34,300.00</span>
+                    </div>
+                </div>
+                <div class="asset-actions">
+                    <button class="action-btn btn-buy">Buy</button>
+                    <button class="action-btn btn-sell">Sell</button>
+            </div>
+            </div>
+
+            <!-- Ethereum -->
+            <div class="asset-card">
+                <div class="asset-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Eth-diamond-rainbow.png" alt="Ethereum" class="asset-icon">
+                    <div>
+                        <div class="asset-name">Ethereum</div>
+                        <div class="asset-symbol">ETH</div>
+                    </div>
+                </div>
+                <div class="asset-info">
+                    <div class="info-item">
+                        <span class="info-label">Balance</span>
+                        <span class="info-value">15.8 ETH</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Value</span>
+                        <span class="info-value">$31,284.21</span>
+                        </div>
+                    <div class="info-item">
+                        <span class="info-label">24h Change</span>
+                        <span class="info-value" style="color: var(--success-color)">+3.8%</span>
+                        </div>
+                    <div class="info-item">
+                        <span class="info-label">Price</span>
+                        <span class="info-value">$1,980.00</span>
+                    </div>
+                </div>
+                <div class="asset-actions">
+                    <button class="action-btn btn-buy">Buy</button>
+                    <button class="action-btn btn-sell">Sell</button>
+                </div>
+            </div>
+
+            <!-- Cardano -->
+            <div class="asset-card">
+                <div class="asset-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Cardano.svg/330px-Cardano.svg.png" alt="Cardano" class="asset-icon">
+                    <div>
+                        <div class="asset-name">Cardano</div>
+                        <div class="asset-symbol">ADA</div>
+                    </div>
+                </div>
+                <div class="asset-info">
+                    <div class="info-item">
+                        <span class="info-label">Balance</span>
+                        <span class="info-value">10,500 ADA</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Value</span>
+                        <span class="info-value">$10,500.00</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">24h Change</span>
+                        <span class="info-value" style="color: var(--danger-color)">-2.1%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Price</span>
+                        <span class="info-value">$1.00</span>
+                    </div>
+                </div>
+                <div class="asset-actions">
+                    <button class="action-btn btn-buy">Buy</button>
+                    <button class="action-btn btn-sell">Sell</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <section class="transactions">
+            <div class="transactions-header">
+                <h2>Recent Transactions</h2>
+            </div>
+            <table class="transactions-list">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Asset</th>
+                        <th>Amount</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="transaction-type type-buy">Buy</span></td>
+                        <td>Bitcoin (BTC)</td>
+                        <td>0.5 BTC</td>
+                        <td>$34,250.00</td>
+                        <td>$17,125.00</td>
+                        <td>2024-02-20 14:30</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr>
+                        <td><span class="transaction-type type-sell">Sell</span></td>
+                        <td>Ethereum (ETH)</td>
+                        <td>2.5 ETH</td>
+                        <td>$1,975.00</td>
+                        <td>$4,937.50</td>
+                        <td>2024-02-19 09:15</td>
+                        <td>Completed</td>
+                    </tr>
+                    <tr>
+                        <td><span class="transaction-type type-buy">Buy</span></td>
+                        <td>Cardano (ADA)</td>
+                        <td>5000 ADA</td>
+                        <td>$1.02</td>
+                        <td>$5,100.00</td>
+                        <td>2024-02-18 16:45</td>
+                        <td>Completed</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Portfolio Chart
+        const ctx = document.getElementById('portfolioChart').getContext('2d');
+        const portfolioChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Portfolio Value',
+                    data: [95000, 98000, 92000, 105000, 115000, 110000, 118000, 125000, 122000, 127000, 125000, 127534],
+                    borderColor: '#1665D8',
+                    backgroundColor: 'rgba(22, 101, 216, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+    </script>
+</body>
+</html> 

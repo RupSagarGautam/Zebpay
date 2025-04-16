@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="32" viewBox="0 0 120 32" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" fill-rule="evenodd">
+        <path d="M0 16 L12 4 L16 4 L4 16 Z M8 16 L20 4 L24 4 L12 16 Z M16 16 L28 4 L32 4 L20 16 Z" fill="#1E88E5"/>
+        <text x="40" y="20" font-family="Arial, sans-serif" font-size="20" font-weight="500">
+            <tspan fill="#1E88E5">zeb</tspan><tspan fill="#333333">pay</tspan>
+        </text>
+    </g>
+</svg> 
